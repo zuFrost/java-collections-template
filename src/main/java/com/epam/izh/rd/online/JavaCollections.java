@@ -29,7 +29,7 @@ public class JavaCollections {
         String sampleText = fileReaderService.readFromFileToString("sample-text.txt");
 
         Properties textWordsStatisticProperties = fileReaderService.loadProperties("text-words-statistics.properties");
-        Properties wordsStatisticProperties = fileReaderService.loadProperties("words-statistics.properties");
+        Properties wordsRepetitionsStatisticProperties = fileReaderService.loadProperties("words-statistics.properties");
 
         Integer correctNumberOfWords = Integer.valueOf(textWordsStatisticProperties.getProperty("number.of.words"));
         Integer correctNumberOfUniqueWords = Integer
@@ -65,14 +65,14 @@ public class JavaCollections {
         List<String> foundWords = textStatisticsAnalyzer.getWords(sampleText);
         practiseMadeCorrectly = checkResultsService
                 .checkGetWordsMethod(foundWords, correctNumberOfWords,
-                        wordsStatisticProperties) && practiseMadeCorrectly;
+                        wordsRepetitionsStatisticProperties) && practiseMadeCorrectly;
 
         // --------------------------- getUniqueWords --------------------------- //
 
         Set<String> foundUniqueWords = textStatisticsAnalyzer.getUniqueWords(sampleText);
         practiseMadeCorrectly = checkResultsService
                 .checkGetUniqueWordsMethod(foundUniqueWords, correctNumberOfUniqueWords,
-                        wordsStatisticProperties) && practiseMadeCorrectly;
+                        wordsRepetitionsStatisticProperties) && practiseMadeCorrectly;
 
         // --------------------------- countNumberOfWordsRepetitions --------------------------- //
 
@@ -80,7 +80,7 @@ public class JavaCollections {
                 .countNumberOfWordsRepetitions(sampleText);
         practiseMadeCorrectly = checkResultsService
                 .checkCountNumberOfWordsRepetitionsMethod(numberOfWordsRepetitions, correctNumberOfUniqueWords,
-                        wordsStatisticProperties) && practiseMadeCorrectly;
+                        wordsRepetitionsStatisticProperties) && practiseMadeCorrectly;
 
         // --------------------------- sortWordsByLength ASC --------------------------- //
 
