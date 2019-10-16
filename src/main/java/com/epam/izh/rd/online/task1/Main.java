@@ -1,10 +1,10 @@
-package com.epam.izh.rd.online;
+package com.epam.izh.rd.online.task1;
 
-
-import com.epam.izh.rd.online.service.CheckResultsService;
-import com.epam.izh.rd.online.service.Direction;
-import com.epam.izh.rd.online.service.FileReaderService;
-import com.epam.izh.rd.online.service.TextStatisticsAnalyzer;
+import com.epam.izh.rd.online.task1.helper.CheckResultsService;
+import com.epam.izh.rd.online.task1.helper.Direction;
+import com.epam.izh.rd.online.task1.helper.FileReaderService;
+import com.epam.izh.rd.online.task1.service.SimpleTextStatisticsAnalyzer;
+import com.epam.izh.rd.online.task1.service.TextStatisticsAnalyzer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,10 +20,9 @@ import java.util.Set;
  * Результаты работы методов будут проверены с ответами.
  * Если метод реализован неверно, в консоль будет выведена ошибка.
  */
-public class JavaCollections {
+public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-
         /* Загрузка текста */
         FileReaderService fileReaderService = new FileReaderService();
         String sampleText = fileReaderService.readFromFileToString("sample-text.txt");
@@ -40,7 +39,7 @@ public class JavaCollections {
         boolean practiseMadeCorrectly;
         CheckResultsService checkResultsService = new CheckResultsService();
 
-        TextStatisticsAnalyzer textStatisticsAnalyzer = new TextStatisticsAnalyzer();
+        TextStatisticsAnalyzer textStatisticsAnalyzer = new SimpleTextStatisticsAnalyzer();
 
         // --------------------------- countSumLengthOfWords --------------------------- //
 
@@ -82,13 +81,13 @@ public class JavaCollections {
                 .checkCountNumberOfWordsRepetitionsMethod(numberOfWordsRepetitions, correctNumberOfUniqueWords,
                         wordsRepetitionsStatisticProperties) && practiseMadeCorrectly;
 
-        // --------------------------- sortWordsByLength ASC --------------------------- //
+        // --------------------------- sortWordsBy ASC --------------------------- //
 
         List<String> ascSortedWords = textStatisticsAnalyzer.sortWordsByLength(sampleText, Direction.ASC);
         practiseMadeCorrectly = checkResultsService
                 .checkSortWordsByLengthMethodAsc(ascSortedWords, correctNumberOfWords) && practiseMadeCorrectly;
 
-        // --------------------------- sortWordsByLength DESC --------------------------- //
+        // --------------------------- sortWordsBy DESC --------------------------- //
 
         List<String> descSortedWords = textStatisticsAnalyzer.sortWordsByLength(sampleText, Direction.DESC);
         practiseMadeCorrectly = checkResultsService
@@ -100,5 +99,4 @@ public class JavaCollections {
             System.out.println("Практика сделана неверно");
         }
     }
-
 }

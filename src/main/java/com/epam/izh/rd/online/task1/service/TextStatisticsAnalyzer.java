@@ -1,10 +1,13 @@
-package com.epam.izh.rd.online.service;
+package com.epam.izh.rd.online.task1.service;
 
+import com.epam.izh.rd.online.task1.helper.Direction;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface ITextStatisticsAnalyzer {
+public interface TextStatisticsAnalyzer {
 
     int countSumLengthOfWords(String text);
 

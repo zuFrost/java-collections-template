@@ -1,15 +1,17 @@
-package com.epam.izh.rd.online.service;
+package com.epam.izh.rd.online.task1.service;
+
+import com.epam.izh.rd.online.task1.helper.Direction;
 
 import java.util.*;
 
 /**
  * Совет:
- * Начните с реализации метода {@link TextStatisticsAnalyzer#getWords(String)}.
+ * Начните с реализации метода {@link SimpleTextStatisticsAnalyzer#getWords(String)}.
  * Затем переиспользуйте данный метод при реализации других.
  * <p>
- * При необходимости, можно создать внутри данного гласа дополнительные вспомогательные приватные методы.
+ * При необходимости, можно создать внутри данного класса дополнительные вспомогательные приватные методы.
  */
-public class TextStatisticsAnalyzer implements ITextStatisticsAnalyzer {
+public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
 
     /**
      * Необходимо реализовать функционал подсчета суммарной длины всех слов (пробелы, знаким препинания итд не считаются).

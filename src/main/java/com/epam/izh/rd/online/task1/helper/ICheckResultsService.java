@@ -1,4 +1,4 @@
-package com.epam.izh.rd.online.service;
+package com.epam.izh.rd.online.task1.helper;
 
 import java.util.List;
 import java.util.Map;
