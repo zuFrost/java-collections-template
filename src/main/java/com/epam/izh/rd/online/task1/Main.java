@@ -81,13 +81,13 @@ public class Main {
                 .checkCountNumberOfWordsRepetitionsMethod(numberOfWordsRepetitions, correctNumberOfUniqueWords,
                         wordsRepetitionsStatisticProperties) && practiseMadeCorrectly;
 
-        // --------------------------- sortWordsBy ASC --------------------------- //
+        // --------------------------- sortWordsByLength ASC --------------------------- //
 
         List<String> ascSortedWords = textStatisticsAnalyzer.sortWordsByLength(sampleText, Direction.ASC);
         practiseMadeCorrectly = checkResultsService
                 .checkSortWordsByLengthMethodAsc(ascSortedWords, correctNumberOfWords) && practiseMadeCorrectly;
 
-        // --------------------------- sortWordsBy DESC --------------------------- //
+        // --------------------------- sortWordsByLength DESC --------------------------- //
 
         List<String> descSortedWords = textStatisticsAnalyzer.sortWordsByLength(sampleText, Direction.DESC);
         practiseMadeCorrectly = checkResultsService

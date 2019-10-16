@@ -128,7 +128,7 @@ public class CheckResultsService implements ICheckResultsService {
     @Override
     public boolean checkSortWordsByLengthMethodAsc(List<String> ascSortedWords, Integer correctNumberOfWords) {
         if (!correctNumberOfWords.equals(ascSortedWords.size())) {
-            System.out.println(String.format("Метод sortWordsBy ASC работает неверно. Количество слов в " +
+            System.out.println(String.format("Метод sortWordsByLength ASC работает неверно. Количество слов в " +
                             "отсортированном списке = %s. Ожидаемое количество слов в отсортированном списке = %s.",
                     ascSortedWords.size(), correctNumberOfWords));
             return false;
@@ -148,7 +148,7 @@ public class CheckResultsService implements ICheckResultsService {
         }
 
         if (!correctSort) {
-            System.out.println("Метод sortWordsBy ASC работает неверно. Некорректная обратная сортировка.");
+            System.out.println("Метод sortWordsByLength ASC работает неверно. Некорректная обратная сортировка.");
             ascSortedWords.forEach(System.out::println);
             return false;
         }
@@ -159,7 +159,7 @@ public class CheckResultsService implements ICheckResultsService {
     @Override
     public boolean checkSortWordsByLengthMethodDesc(List<String> descSortedWords, Integer correctNumberOfWords) {
         if (!correctNumberOfWords.equals(descSortedWords.size())) {
-            System.out.println(String.format("Метод sortWordsBy DESC работает неверно. Количество слов в " +
+            System.out.println(String.format("Метод sortWordsByLength DESC работает неверно. Количество слов в " +
                             "отсортированном списке = %s. Ожидаемое количество слов в отсортированном списке = %s.",
                     descSortedWords.size(), correctNumberOfWords));
             return false;
@@ -179,7 +179,7 @@ public class CheckResultsService implements ICheckResultsService {
         }
 
         if (!correctSort) {
-            System.out.println("Метод sortWordsBy DESC работает неверно. Некорректная прямая сортировка.");
+            System.out.println("Метод sortWordsByLength DESC работает неверно. Некорректная прямая сортировка.");
             descSortedWords.forEach(System.out::println);
             return false;
         }
