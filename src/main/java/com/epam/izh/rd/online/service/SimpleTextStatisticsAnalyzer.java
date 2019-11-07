@@ -1,6 +1,6 @@
-package com.epam.izh.rd.online.task1.service;
+package com.epam.izh.rd.online.service;
 
-import com.epam.izh.rd.online.task1.helper.Direction;
+import com.epam.izh.rd.online.helper.Direction;
 
 import java.util.*;
 
@@ -80,7 +80,7 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public Map<String, Integer> countNumberOfWordsRepetitions(String text) {
-        return new HashMap<>();
+        return Collections.emptyMap();
     }
 
     /**

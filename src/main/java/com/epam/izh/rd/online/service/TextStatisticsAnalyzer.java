@@ -1,8 +1,7 @@
-package com.epam.izh.rd.online.task1.service;
+package com.epam.izh.rd.online.service;
 
-import com.epam.izh.rd.online.task1.helper.Direction;
+import com.epam.izh.rd.online.helper.Direction;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
