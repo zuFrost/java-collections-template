@@ -18,6 +18,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class TextAnalyzerTest {
 
+    private static final int SUM_LENGTH_OF_WORDS = 2119;
+    private static final int COUNT_OF_WORDS = 503;
+    private static final int COUNT_OF_UNIQUE_WORDS = 265;
+
     private static TextStatisticsAnalyzer textStatisticsAnalyzer;
 
     private static String text;
@@ -39,19 +43,19 @@ public class TextAnalyzerTest {
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countSumLengthOfWords(String text)")
     void testCountSumLengthOfWords() {
-        assertEquals(2119, textStatisticsAnalyzer.countSumLengthOfWords(text));
+        assertEquals(SUM_LENGTH_OF_WORDS, textStatisticsAnalyzer.countSumLengthOfWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countNumberOfWords(String text)")
     void testCountNumberOfWords() {
-        assertEquals(503, textStatisticsAnalyzer.countNumberOfWords(text));
+        assertEquals(COUNT_OF_WORDS, textStatisticsAnalyzer.countNumberOfWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countNumberOfUniqueWords(String text)")
     void testCountNumberOfUniqueWords() {
-        assertEquals(265, textStatisticsAnalyzer.countNumberOfUniqueWords(text));
+        assertEquals(COUNT_OF_UNIQUE_WORDS, textStatisticsAnalyzer.countNumberOfUniqueWords(text));
     }
 
     @Test
