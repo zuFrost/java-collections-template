@@ -1,4 +1,4 @@
-package com.epam.izh.rd.online.task1.helper;
+package com.epam.izh.rd.online.helper;
 
 import java.io.IOException;
 import java.io.InputStream;

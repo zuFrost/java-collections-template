@@ -1,4 +1,4 @@
-package com.epam.izh.rd.online.task1.helper;
+package com.epam.izh.rd.online.helper;
 
 /**
  * Параметр сортировки
