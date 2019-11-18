@@ -4,6 +4,7 @@ import com.epam.izh.rd.online.helper.Direction;
 import com.epam.izh.rd.online.helper.FileReaderService;
 import com.epam.izh.rd.online.helper.IFileReaderService;
 import com.epam.izh.rd.online.service.SimpleTextStatisticsAnalyzer;
+import com.epam.izh.rd.online.service.StreamApiTextStatisticsAnalyzer;
 import com.epam.izh.rd.online.service.TextStatisticsAnalyzer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +23,8 @@ public class TextAnalyzerTest {
     private static final int COUNT_OF_WORDS = 503;
     private static final int COUNT_OF_UNIQUE_WORDS = 265;
 
-    private static TextStatisticsAnalyzer textStatisticsAnalyzer;
+    private static TextStatisticsAnalyzer simpleTextStatisticsAnalyzer;
+    private static TextStatisticsAnalyzer streamApiTextStatisticsAnalyzer;
 
     private static String text;
     private static Properties properties;
@@ -30,7 +32,8 @@ public class TextAnalyzerTest {
     @BeforeAll
     static void setup() {
         IFileReaderService fileReaderService = new FileReaderService();
-        textStatisticsAnalyzer = new SimpleTextStatisticsAnalyzer();
+        simpleTextStatisticsAnalyzer = new SimpleTextStatisticsAnalyzer();
+        streamApiTextStatisticsAnalyzer = new StreamApiTextStatisticsAnalyzer();
 
         try {
             text = fileReaderService.readFromFileToString("sample-text.txt");
@@ -43,57 +46,49 @@ public class TextAnalyzerTest {
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countSumLengthOfWords(String text)")
     void testCountSumLengthOfWords() {
-        assertEquals(SUM_LENGTH_OF_WORDS, textStatisticsAnalyzer.countSumLengthOfWords(text));
+        assertEquals(SUM_LENGTH_OF_WORDS, simpleTextStatisticsAnalyzer.countSumLengthOfWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countNumberOfWords(String text)")
     void testCountNumberOfWords() {
-        assertEquals(COUNT_OF_WORDS, textStatisticsAnalyzer.countNumberOfWords(text));
+        assertEquals(COUNT_OF_WORDS, simpleTextStatisticsAnalyzer.countNumberOfWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countNumberOfUniqueWords(String text)")
     void testCountNumberOfUniqueWords() {
-        assertEquals(COUNT_OF_UNIQUE_WORDS, textStatisticsAnalyzer.countNumberOfUniqueWords(text));
+        assertEquals(COUNT_OF_UNIQUE_WORDS, simpleTextStatisticsAnalyzer.countNumberOfUniqueWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.sortWordsByLength(String text, ASC)")
     void testSortWordsByLength() {
-        List<String> words = getAllWords().stream()
-                .sorted(Comparator.comparing(String::length))
-                .collect(Collectors.toList());
-
-        assertEquals(words, textStatisticsAnalyzer.sortWordsByLength(text, Direction.ASC));
+        assertEquals(getSortedList(Direction.ASC), simpleTextStatisticsAnalyzer.sortWordsByLength(text, Direction.ASC));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.sortWordsByLength(String text, DESC)")
     void testSortWordsByLengthDesc() {
-        List<String> words = getAllWords().stream()
-                .sorted(Comparator.comparing(String::length).reversed())
-                .collect(Collectors.toList());
-
-        assertEquals(words, textStatisticsAnalyzer.sortWordsByLength(text, Direction.DESC));
+        assertEquals(getSortedList(Direction.DESC), simpleTextStatisticsAnalyzer.sortWordsByLength(text, Direction.DESC));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.getWords(String text)")
     void testGetWords() {
-        assertEquals(getAllWords(), textStatisticsAnalyzer.getWords(text));
+        assertEquals(getAllWords(), simpleTextStatisticsAnalyzer.getWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.getUniqueWords(String text)")
     void testGetUniqueWords() {
-        assertEquals(getAllWords().stream().distinct().collect(Collectors.toList()), textStatisticsAnalyzer.getUniqueWords(text));
+        assertEquals(getAllWords().stream().distinct().collect(Collectors.toList()), simpleTextStatisticsAnalyzer.getUniqueWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countNumberOfWordsRepetitions(String text)")
     void testCountNumberOfWordsRepetitions() {
-        Map<String, Integer> result = textStatisticsAnalyzer.countNumberOfWordsRepetitions(text);
+        Map<String, Integer> result = simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(text);
 
         for (Map.Entry<String, Integer> e : result.entrySet()) {
             boolean wordMatchWithProperty = Integer.valueOf(properties.getProperty(e.getKey())).equals(e.getValue());
@@ -102,6 +97,72 @@ public class TextAnalyzerTest {
                 fail();
             }
         }
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.countSumLengthOfWords(String text)")
+    void testCountSumLengthOfWordsStream() {
+        assertEquals(SUM_LENGTH_OF_WORDS, streamApiTextStatisticsAnalyzer.countSumLengthOfWords(text));
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.countNumberOfWords(String text)")
+    void testCountNumberOfWordsStream() {
+        assertEquals(COUNT_OF_WORDS, streamApiTextStatisticsAnalyzer.countNumberOfWords(text));
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.countNumberOfUniqueWords(String text)")
+    void testCountNumberOfUniqueWordsStream() {
+        assertEquals(COUNT_OF_UNIQUE_WORDS, streamApiTextStatisticsAnalyzer.countNumberOfUniqueWords(text));
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.sortWordsByLength(String text, ASC)")
+    void testSortWordsByLengthStream() {
+        assertEquals(getSortedList(Direction.ASC), streamApiTextStatisticsAnalyzer.sortWordsByLength(text, Direction.ASC));
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.sortWordsByLength(String text, DESC)")
+    void testSortWordsByLengthDescStream() {
+        assertEquals(getSortedList(Direction.DESC), streamApiTextStatisticsAnalyzer.sortWordsByLength(text, Direction.DESC));
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.getWords(String text)")
+    void testGetWordsStream() {
+        assertEquals(getAllWords(), streamApiTextStatisticsAnalyzer.getWords(text));
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.getUniqueWords(String text)")
+    void testGetUniqueWordsStream() {
+        assertEquals(getAllWords().stream().distinct().collect(Collectors.toList()), streamApiTextStatisticsAnalyzer.getUniqueWords(text));
+    }
+
+    @Test
+    @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.countNumberOfWordsRepetitions(String text)")
+    void testCountNumberOfWordsRepetitionsStream() {
+        Map<String, Integer> result = streamApiTextStatisticsAnalyzer.countNumberOfWordsRepetitions(text);
+
+        for (Map.Entry<String, Integer> e : result.entrySet()) {
+            boolean wordMatchWithProperty = Integer.valueOf(properties.getProperty(e.getKey())).equals(e.getValue());
+
+            if (!wordMatchWithProperty) {
+                fail();
+            }
+        }
+    }
+
+    private List<String> getSortedList(Direction direction) {
+        Comparator<String> stringComparator = direction.equals(Direction.ASC) ?
+                Comparator.comparing(String::length) :
+                Comparator.comparing(String::length).reversed();
+
+        return getAllWords().stream()
+                .sorted(stringComparator)
+                .collect(Collectors.toList());
     }
 
     private List<String> getAllWords() {
