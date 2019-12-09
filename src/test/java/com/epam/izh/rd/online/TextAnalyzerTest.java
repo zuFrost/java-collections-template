@@ -23,6 +23,8 @@ public class TextAnalyzerTest {
     private static final int COUNT_OF_WORDS = 503;
     private static final int COUNT_OF_UNIQUE_WORDS = 265;
 
+    private static List<String> wordsList;
+
     private static TextStatisticsAnalyzer simpleTextStatisticsAnalyzer;
     private static TextStatisticsAnalyzer streamApiTextStatisticsAnalyzer;
 
@@ -38,6 +40,7 @@ public class TextAnalyzerTest {
         try {
             text = fileReaderService.readFromFileToString("sample-text.txt");
             properties = fileReaderService.loadProperties("words-statistics.properties");
+            wordsList = readWordsFromProperties();
         } catch (Exception e) {
             throw new NullPointerException(e.getMessage());
         }
@@ -76,27 +79,19 @@ public class TextAnalyzerTest {
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.getWords(String text)")
     void testGetWords() {
-        assertEquals(getAllWords(), simpleTextStatisticsAnalyzer.getWords(text));
+        assertListsContainSameElements(wordsList, simpleTextStatisticsAnalyzer.getWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.getUniqueWords(String text)")
     void testGetUniqueWords() {
-        assertEquals(getAllWords().stream().distinct().collect(Collectors.toList()), simpleTextStatisticsAnalyzer.getUniqueWords(text));
+        assertListsContainSameElements(wordsList.stream().distinct().collect(Collectors.toList()), simpleTextStatisticsAnalyzer.getUniqueWords(text));
     }
 
     @Test
     @DisplayName("Тест метода TextStatisticsAnalyzer.countNumberOfWordsRepetitions(String text)")
     void testCountNumberOfWordsRepetitions() {
-        Map<String, Integer> result = simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(text);
-
-        for (Map.Entry<String, Integer> e : result.entrySet()) {
-            boolean wordMatchWithProperty = Integer.valueOf(properties.getProperty(e.getKey())).equals(e.getValue());
-
-            if (!wordMatchWithProperty) {
-                fail();
-            }
-        }
+        assertRepetitions(simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(text));
     }
 
     @Test
@@ -132,27 +127,19 @@ public class TextAnalyzerTest {
     @Test
     @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.getWords(String text)")
     void testGetWordsStream() {
-        assertEquals(getAllWords(), streamApiTextStatisticsAnalyzer.getWords(text));
+        assertListsContainSameElements(wordsList, streamApiTextStatisticsAnalyzer.getWords(text));
     }
 
     @Test
     @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.getUniqueWords(String text)")
     void testGetUniqueWordsStream() {
-        assertEquals(getAllWords().stream().distinct().collect(Collectors.toList()), streamApiTextStatisticsAnalyzer.getUniqueWords(text));
+        assertListsContainSameElements(wordsList.stream().distinct().collect(Collectors.toList()), streamApiTextStatisticsAnalyzer.getUniqueWords(text));
     }
 
     @Test
     @DisplayName("Тест метода StreamApiTextStatisticsAnalyzer.countNumberOfWordsRepetitions(String text)")
     void testCountNumberOfWordsRepetitionsStream() {
-        Map<String, Integer> result = streamApiTextStatisticsAnalyzer.countNumberOfWordsRepetitions(text);
-
-        for (Map.Entry<String, Integer> e : result.entrySet()) {
-            boolean wordMatchWithProperty = Integer.valueOf(properties.getProperty(e.getKey())).equals(e.getValue());
-
-            if (!wordMatchWithProperty) {
-                fail();
-            }
-        }
+        assertRepetitions(streamApiTextStatisticsAnalyzer.countNumberOfWordsRepetitions(text));
     }
 
     private List<String> getSortedList(Direction direction) {
@@ -160,12 +147,12 @@ public class TextAnalyzerTest {
                 Comparator.comparing(String::length) :
                 Comparator.comparing(String::length).reversed();
 
-        return getAllWords().stream()
+        return wordsList.stream()
                 .sorted(stringComparator)
                 .collect(Collectors.toList());
     }
 
-    private List<String> getAllWords() {
+    private static List<String> readWordsFromProperties() {
         List<String> result = new ArrayList<>();
 
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
@@ -180,5 +167,25 @@ public class TextAnalyzerTest {
         }
 
         return result;
+    }
+
+    private void assertListsContainSameElements(Collection<?> expected, Collection<?> actual) {
+        if (expected.size() != actual.size() || !actual.containsAll(expected)) {
+            fail();
+        }
+    }
+
+    private void assertRepetitions(Map<String, Integer> result) {
+        if (result.isEmpty()) {
+            fail();
+        }
+
+        for (Map.Entry<String, Integer> e : result.entrySet()) {
+            boolean wordMatchWithProperty = Integer.valueOf(properties.getProperty(e.getKey())).equals(e.getValue());
+
+            if (!wordMatchWithProperty) {
+                fail();
+            }
+        }
     }
 }

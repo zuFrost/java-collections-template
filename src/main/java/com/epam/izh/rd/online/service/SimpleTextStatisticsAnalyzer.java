@@ -4,6 +4,8 @@ import com.epam.izh.rd.online.helper.Direction;
 
 import java.util.*;
 
+import static java.util.Collections.*;
+
 /**
  * Совет:
  * Начните с реализации метода {@link SimpleTextStatisticsAnalyzer#getWords(String)}.
@@ -55,7 +57,7 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public List<String> getWords(String text) {
-        return new ArrayList<>();
+        return emptyList();
     }
 
     /**
@@ -68,7 +70,7 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public Set<String> getUniqueWords(String text) {
-        return new HashSet<>();
+        return emptySet();
     }
 
     /**
@@ -80,7 +82,7 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public Map<String, Integer> countNumberOfWordsRepetitions(String text) {
-        return Collections.emptyMap();
+        return emptyMap();
     }
 
     /**
@@ -93,6 +95,6 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public List<String> sortWordsByLength(String text, Direction direction) {
-        return new ArrayList<>();
+        return emptyList();
     }
 }
