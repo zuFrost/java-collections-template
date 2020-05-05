@@ -57,7 +57,15 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public List<String> getWords(String text) {
-        return emptyList();
+        String[] arrayOfWords = text.split("[\\W]");
+        List<String> listOfWords = new ArrayList<String>(Arrays.asList(arrayOfWords));
+
+        //remove all spaces
+        while (listOfWords.contains("")) {
+            listOfWords.remove("");
+        }
+
+        return listOfWords;
     }
 
     /**
