@@ -1,5 +1,6 @@
 package com.epam.izh.rd.online;
 
+import com.epam.izh.rd.online.helper.Direction;
 import com.epam.izh.rd.online.helper.FileReaderService;
 import com.epam.izh.rd.online.service.SimpleTextStatisticsAnalyzer;
 
@@ -26,6 +27,11 @@ public class Main {
 
         System.out.println("количество уникальных слов Map = " + simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation).size());
         System.out.println(simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation));
+
+        System.out.println("sortWordsByLength ASC " + simpleTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.ASC));
+        System.out.println("sortWordsByLength DESC " + simpleTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.DESC));
+
+        System.out.println("countSumLengthOfWords = " + simpleTextStatisticsAnalyzer.countSumLengthOfWords(textForManipulation));
 
 
 
