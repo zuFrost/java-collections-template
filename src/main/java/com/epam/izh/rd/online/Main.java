@@ -3,6 +3,7 @@ package com.epam.izh.rd.online;
 import com.epam.izh.rd.online.helper.Direction;
 import com.epam.izh.rd.online.helper.FileReaderService;
 import com.epam.izh.rd.online.service.SimpleTextStatisticsAnalyzer;
+import com.epam.izh.rd.online.service.StreamApiTextStatisticsAnalyzer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,6 +19,7 @@ public class Main {
         SimpleTextStatisticsAnalyzer simpleTextStatisticsAnalyzer = new SimpleTextStatisticsAnalyzer();
         List<String> listOfWordsInText = new ArrayList<>();
         listOfWordsInText = simpleTextStatisticsAnalyzer.getWords(textForManipulation);
+        StreamApiTextStatisticsAnalyzer streamApiTextStatisticsAnalyzer = new StreamApiTextStatisticsAnalyzer();
 
 //        System.out.println("количество слов в тексте = " + listOfWordsInText.size());
 //        System.out.println(listOfWordsInText);
@@ -37,8 +39,10 @@ public class Main {
         //* Например для текста "Hello, Hi, mother, father - good, cat, c!!" должны вернуться результаты :
         //     * ASC : {"mother", "father", "Hello", "good", "cat", "Hi", "c"}
         //     * DESC : {"c", "Hi", "cat", "good", "Hello", "father", "mother"}
-        String testString = "Hello, Hi, mother, father - good, cat, c!!";
-        System.out.println("sortWordsByLength = " + simpleTextStatisticsAnalyzer.sortWordsByLength(testString, Direction.DESC));
+//        String testString = "Hello, Hi, mother, father - good, cat, c!!";
+//        System.out.println("sortWordsByLength = " + simpleTextStatisticsAnalyzer.sortWordsByLength(testString, Direction.DESC));
+        System.out.println(streamApiTextStatisticsAnalyzer.getWords(textForManipulation));
+        System.out.println(streamApiTextStatisticsAnalyzer.getUniqueWords(textForManipulation));
 
 
 
