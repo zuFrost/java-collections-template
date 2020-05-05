@@ -21,6 +21,12 @@ public class Main {
         System.out.println("количество слов в тексте = " + listOfWordsInText.size());
         System.out.println(listOfWordsInText);
 
+        System.out.println("количество уникальных слов в тексте = " + simpleTextStatisticsAnalyzer.getUniqueWords(textForManipulation).size());
+        System.out.println(simpleTextStatisticsAnalyzer.getUniqueWords(textForManipulation));
+
+        System.out.println("количество уникальных слов Map = " + simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation).size());
+        System.out.println(simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation));
+
 
 
 

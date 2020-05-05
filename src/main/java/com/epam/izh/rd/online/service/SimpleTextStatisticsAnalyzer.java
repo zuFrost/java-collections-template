@@ -78,7 +78,17 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public Set<String> getUniqueWords(String text) {
-        return emptySet();
+        String[] arrayOfWords = text.split("[\\W]");
+        List<String> listOfWords = new ArrayList<String>(Arrays.asList(arrayOfWords));
+
+        //remove all spaces
+        while (listOfWords.contains("")) {
+            listOfWords.remove("");
+        }
+        Set<String> setOfWords = new HashSet<>(listOfWords);
+
+        return setOfWords;
+
     }
 
     /**
@@ -90,7 +100,25 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public Map<String, Integer> countNumberOfWordsRepetitions(String text) {
-        return emptyMap();
+        String[] arrayOfWords = text.split("[\\W]");
+        List<String> listOfWords = new ArrayList<String>(Arrays.asList(arrayOfWords));
+
+        //remove all spaces
+        while (listOfWords.contains("")) {
+            listOfWords.remove("");
+        }
+        Set<String> setOfWords = new HashSet<>(listOfWords);
+        Map<String, Integer> mapOfWords = new HashMap<>();
+        // fill Map keys by Set
+        for (String word : setOfWords) {
+            mapOfWords.put(word, 0);
+        }
+        //fill Map values by list
+        for (String word : listOfWords) {
+            mapOfWords.put(word, mapOfWords.get(word) + 1);
+        }
+
+        return mapOfWords;
     }
 
     /**
