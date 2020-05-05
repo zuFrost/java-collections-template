@@ -19,19 +19,21 @@ public class Main {
         List<String> listOfWordsInText = new ArrayList<>();
         listOfWordsInText = simpleTextStatisticsAnalyzer.getWords(textForManipulation);
 
-        System.out.println("количество слов в тексте = " + listOfWordsInText.size());
-        System.out.println(listOfWordsInText);
-
-        System.out.println("количество уникальных слов в тексте = " + simpleTextStatisticsAnalyzer.getUniqueWords(textForManipulation).size());
-        System.out.println(simpleTextStatisticsAnalyzer.getUniqueWords(textForManipulation));
-
-        System.out.println("количество уникальных слов Map = " + simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation).size());
-        System.out.println(simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation));
-
-        System.out.println("sortWordsByLength ASC " + simpleTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.ASC));
-        System.out.println("sortWordsByLength DESC " + simpleTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.DESC));
-
-        System.out.println("countSumLengthOfWords = " + simpleTextStatisticsAnalyzer.countSumLengthOfWords(textForManipulation));
+//        System.out.println("количество слов в тексте = " + listOfWordsInText.size());
+//        System.out.println(listOfWordsInText);
+//
+//        System.out.println("количество уникальных слов в тексте = " + simpleTextStatisticsAnalyzer.getUniqueWords(textForManipulation).size());
+//        System.out.println(simpleTextStatisticsAnalyzer.getUniqueWords(textForManipulation));
+//
+//        System.out.println("количество уникальных слов Map = " + simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation).size());
+//        System.out.println(simpleTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation));
+//
+//        System.out.println("sortWordsByLength ASC " + simpleTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.ASC));
+//        System.out.println("sortWordsByLength DESC " + simpleTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.DESC));
+//
+//        System.out.println("countSumLengthOfWords = " + simpleTextStatisticsAnalyzer.countSumLengthOfWords(textForManipulation));
+//        System.out.println("countNumberOfWords = " + simpleTextStatisticsAnalyzer.countNumberOfWords(textForManipulation));
+        System.out.println("getUniqueWords = " + simpleTextStatisticsAnalyzer.countNumberOfUniqueWords(textForManipulation));
 
 
 
