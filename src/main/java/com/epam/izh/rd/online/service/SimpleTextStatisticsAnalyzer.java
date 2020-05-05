@@ -136,6 +136,29 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public List<String> sortWordsByLength(String text, Direction direction) {
-        return emptyList();
+        List<String> listOfWords = getWords(text);
+
+        Comparator<String> ascDirection = new Comparator<String>(){
+            @Override
+            public int compare(String s1, String s2) {
+                return s1.length () - s2.length ();
+            }
+        };
+
+        Comparator<String> descDirection = new Comparator<String>(){
+            @Override
+            public int compare (String s1, String s2) {
+                return s2.length () - s1.length ();
+            }
+        };
+
+        if (direction == Direction.ASC) {
+            Collections.sort(listOfWords, ascDirection);
+        } else if (direction == Direction.DESC) {
+            Collections.sort(listOfWords, descDirection);
+        }
+
+        return listOfWords;
     }
+
 }

@@ -33,7 +33,12 @@ public class Main {
 //
 //        System.out.println("countSumLengthOfWords = " + simpleTextStatisticsAnalyzer.countSumLengthOfWords(textForManipulation));
 //        System.out.println("countNumberOfWords = " + simpleTextStatisticsAnalyzer.countNumberOfWords(textForManipulation));
-        System.out.println("getUniqueWords = " + simpleTextStatisticsAnalyzer.countNumberOfUniqueWords(textForManipulation));
+//        System.out.println("getUniqueWords = " + simpleTextStatisticsAnalyzer.countNumberOfUniqueWords(textForManipulation));
+        //* Например для текста "Hello, Hi, mother, father - good, cat, c!!" должны вернуться результаты :
+        //     * ASC : {"mother", "father", "Hello", "good", "cat", "Hi", "c"}
+        //     * DESC : {"c", "Hi", "cat", "good", "Hello", "father", "mother"}
+        String testString = "Hello, Hi, mother, father - good, cat, c!!";
+        System.out.println("sortWordsByLength = " + simpleTextStatisticsAnalyzer.sortWordsByLength(testString, Direction.DESC));
 
 
 
