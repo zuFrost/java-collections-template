@@ -85,8 +85,7 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public Set<String> getUniqueWords(String text) {
-        String[] arrayOfWords = text.split("[\\W]");
-        List<String> listOfWords = new ArrayList<String>(Arrays.asList(arrayOfWords));
+        List<String> listOfWords = getWords(text);
 
         //remove all spaces
         while (listOfWords.contains("")) {
@@ -107,8 +106,7 @@ public class SimpleTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
      */
     @Override
     public Map<String, Integer> countNumberOfWordsRepetitions(String text) {
-        String[] arrayOfWords = text.split("[\\W]");
-        List<String> listOfWords = new ArrayList<String>(Arrays.asList(arrayOfWords));
+        List<String> listOfWords = getWords(text);
 
         //remove all spaces
         while (listOfWords.contains("")) {
