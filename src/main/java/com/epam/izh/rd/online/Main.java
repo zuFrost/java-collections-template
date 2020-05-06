@@ -44,6 +44,7 @@ public class Main {
 //        System.out.println(streamApiTextStatisticsAnalyzer.getWords(textForManipulation));
 //        System.out.println(streamApiTextStatisticsAnalyzer.getUniqueWords(textForManipulation));
         System.out.println("countNumberOfWords " + streamApiTextStatisticsAnalyzer.countNumberOfWords(textForManipulation));
+        System.out.println("countSumLengthOfWords " + streamApiTextStatisticsAnalyzer.countSumLengthOfWords(textForManipulation));
 
 
 
