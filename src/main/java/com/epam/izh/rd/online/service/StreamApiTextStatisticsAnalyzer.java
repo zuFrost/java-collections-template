@@ -9,7 +9,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.Collections.*;
+import static java.util.Collections.emptyList;
 
 /**
  * Данный класс обязан использовать StreamApi из функционала Java 8. Функциональность должна быть идентична
@@ -62,7 +62,7 @@ public class StreamApiTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
                     .collect(Collectors.toList());
         } else if (direction == Direction.DESC) {
             return getWords(text).stream()
-                    .sorted((o1, o2) -> - (o1.length() - (o2.length())))
+                    .sorted((o1, o2) -> -(o1.length() - (o2.length())))
                     .collect(Collectors.toList());
         }
         return emptyList();
