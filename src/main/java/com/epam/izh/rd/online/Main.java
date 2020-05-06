@@ -46,6 +46,7 @@ public class Main {
         System.out.println("countNumberOfWords " + streamApiTextStatisticsAnalyzer.countNumberOfWords(textForManipulation));
         System.out.println("countSumLengthOfWords " + streamApiTextStatisticsAnalyzer.countSumLengthOfWords(textForManipulation));
         System.out.println("countNumberOfUniqueWords " + streamApiTextStatisticsAnalyzer.countNumberOfUniqueWords(textForManipulation));
+        System.out.println("countNumberOfWordsRepetitions " + streamApiTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation));
 
 
 

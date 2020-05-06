@@ -50,7 +50,8 @@ public class StreamApiTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
 
     @Override
     public Map<String, Integer> countNumberOfWordsRepetitions(String text) {
-        return emptyMap();
+        return  getWords(text).stream().collect(Collectors.toConcurrentMap(word -> word, count -> 1, Integer::sum));
+
     }
 
     @Override
