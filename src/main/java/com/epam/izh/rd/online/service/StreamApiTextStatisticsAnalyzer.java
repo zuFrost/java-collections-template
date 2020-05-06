@@ -2,12 +2,14 @@ package com.epam.izh.rd.online.service;
 
 import com.epam.izh.rd.online.helper.Direction;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static java.util.Collections.*;
+import static java.util.Collections.emptyList;
 
 /**
  * Данный класс обязан использовать StreamApi из функционала Java 8. Функциональность должна быть идентична
@@ -16,36 +18,53 @@ import static java.util.Collections.*;
 public class StreamApiTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
     @Override
     public int countSumLengthOfWords(String text) {
-        return 0;
+        return getWords(text).stream()
+                .map((String word) -> word.length())
+                .reduce((n, m) -> n + m).get();
     }
 
     @Override
     public int countNumberOfWords(String text) {
-        return 0;
+        return getWords(text).size();
     }
 
     @Override
     public int countNumberOfUniqueWords(String text) {
-        return 0;
+        return getWords(text).stream()
+                .collect(Collectors.toSet()).size();
     }
 
     @Override
     public List<String> getWords(String text) {
-        return emptyList();
+
+        return Arrays.stream(text.split("\\W+"))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Set<String> getUniqueWords(String text) {
-        return emptySet();
+
+        return Arrays.stream(text.split("\\W+"))
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Map<String, Integer> countNumberOfWordsRepetitions(String text) {
-        return emptyMap();
+        return getWords(text).stream().collect(Collectors.toConcurrentMap(word -> word, count -> 1, Integer::sum));
+
     }
 
     @Override
     public List<String> sortWordsByLength(String text, Direction direction) {
+        if (direction == Direction.ASC) {
+            return getWords(text).stream()
+                    .sorted((o1, o2) -> o1.length() - (o2.length()))
+                    .collect(Collectors.toList());
+        } else if (direction == Direction.DESC) {
+            return getWords(text).stream()
+                    .sorted((o1, o2) -> -(o1.length() - (o2.length())))
+                    .collect(Collectors.toList());
+        }
         return emptyList();
     }
 }
