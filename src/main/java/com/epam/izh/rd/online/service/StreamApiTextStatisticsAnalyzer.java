@@ -18,7 +18,7 @@ import static java.util.Collections.*;
 public class StreamApiTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
     @Override
     public int countSumLengthOfWords(String text) {
-                return getWords(text).stream()
+        return getWords(text).stream()
                 .map((String word) -> word.length())
                 .reduce((n, m) -> n + m).get();
     }
@@ -50,12 +50,21 @@ public class StreamApiTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
 
     @Override
     public Map<String, Integer> countNumberOfWordsRepetitions(String text) {
-        return  getWords(text).stream().collect(Collectors.toConcurrentMap(word -> word, count -> 1, Integer::sum));
+        return getWords(text).stream().collect(Collectors.toConcurrentMap(word -> word, count -> 1, Integer::sum));
 
     }
 
     @Override
     public List<String> sortWordsByLength(String text, Direction direction) {
+        if (direction == Direction.ASC) {
+            return getWords(text).stream()
+                    .sorted((o1, o2) -> o1.length() - (o2.length()))
+                    .collect(Collectors.toList());
+        } else if (direction == Direction.DESC) {
+            return getWords(text).stream()
+                    .sorted((o1, o2) -> - (o1.length() - (o2.length())))
+                    .collect(Collectors.toList());
+        }
         return emptyList();
     }
 }

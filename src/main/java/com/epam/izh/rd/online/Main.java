@@ -47,7 +47,8 @@ public class Main {
         System.out.println("countSumLengthOfWords " + streamApiTextStatisticsAnalyzer.countSumLengthOfWords(textForManipulation));
         System.out.println("countNumberOfUniqueWords " + streamApiTextStatisticsAnalyzer.countNumberOfUniqueWords(textForManipulation));
         System.out.println("countNumberOfWordsRepetitions " + streamApiTextStatisticsAnalyzer.countNumberOfWordsRepetitions(textForManipulation));
-
+        System.out.println("sortWordsByLength " + streamApiTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.ASC));
+        System.out.println("sortWordsByLength " + streamApiTextStatisticsAnalyzer.sortWordsByLength(textForManipulation, Direction.DESC));
 
 
 
