@@ -4,6 +4,8 @@ import com.epam.izh.rd.online.helper.Direction;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,7 +30,8 @@ public class StreamApiTextStatisticsAnalyzer implements TextStatisticsAnalyzer {
 
     @Override
     public int countNumberOfUniqueWords(String text) {
-        return 0;
+        return getWords(text).stream()
+                .collect(Collectors.toSet()).size();
     }
 
     @Override
