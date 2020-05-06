@@ -41,8 +41,9 @@ public class Main {
         //     * DESC : {"c", "Hi", "cat", "good", "Hello", "father", "mother"}
 //        String testString = "Hello, Hi, mother, father - good, cat, c!!";
 //        System.out.println("sortWordsByLength = " + simpleTextStatisticsAnalyzer.sortWordsByLength(testString, Direction.DESC));
-        System.out.println(streamApiTextStatisticsAnalyzer.getWords(textForManipulation));
-        System.out.println(streamApiTextStatisticsAnalyzer.getUniqueWords(textForManipulation));
+//        System.out.println(streamApiTextStatisticsAnalyzer.getWords(textForManipulation));
+//        System.out.println(streamApiTextStatisticsAnalyzer.getUniqueWords(textForManipulation));
+        System.out.println("countNumberOfWords " + streamApiTextStatisticsAnalyzer.countNumberOfWords(textForManipulation));
 
 
 
